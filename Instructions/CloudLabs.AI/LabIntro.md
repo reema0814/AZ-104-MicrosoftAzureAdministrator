@@ -18,4 +18,4 @@
 
     ![](../CloudLabs.AI/Images/image-901.jpg)
 
-1. If you get **PowerShell Window** open, please dropdown the window and start the lab.
+1. If you see a **PowerShell Window** open in your lab environment, please **minimize** the window and start the lab.
