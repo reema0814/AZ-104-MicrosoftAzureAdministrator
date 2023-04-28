@@ -1,38 +1,24 @@
-# Lab 02a - Manage Subscriptions and RBAC
-# Student lab manual
-
-## Lab requirements:
-
-This lab requires permissions to create Azure Active Directory (Azure AD) users, create custom Azure Role Based Access Control (RBAC) roles, and assign these roles to Azure AD users. Not all lab hosters may provide this capability. Ask your instructor for the availability of this lab.
+# Lab 2a - Manage Subscriptions and RBAC
 
 ## Lab scenario
-
 In order to improve management of Azure resources in Contoso, you have been tasked with implementing the following functionality:
-
 - creating a management group that would include all of Contoso's Azure subscriptions
-
 - granting permissions to submit support requests for all subscriptions in the management group to a designated Azure Active Directory user. That user's permissions should be limited only to: 
-
     - creating support request tickets
     - viewing resource groups 
 
 ## Objectives
-
 In this lab, you will:
-
 + Task 1: Implement Management Groups
 + Task 2: Create custom RBAC roles 
 + Task 3: Assign RBAC roles
 
+### Estimated timing: 30 minutes
 
-## Estimated timing: 30 minutes
+## Architecture diagram
+![image](../media/lab02a.png)
 
-## Instructions
-
-
-### Exercise 1
-
-#### Task 1: Implement Management Groups
+## Task 1: Implement Management Groups
 
 In this task, you will create and configure management groups. 
 
@@ -40,17 +26,17 @@ In this task, you will create and configure management groups.
 
 1. Search for and select **Management groups** to navigate to the **Management groups** blade.
 
-1. Review the messages at the top of the **Management groups** blade. If you are seeing the message stating **You are registered as a directory admin but do not have the necessary permissions to access the root management group**, perfom the following sequence of steps:
+1. Review the messages at the top of the **Management groups** blade. If you are seeing the message stating **You are registered as a directory admin but do not have the necessary permissions to access the root management group**, perform the following sequence of steps:
 
     1. In the Azure portal, search for and select **Azure Active Directory**.
     
     1.  On the blade displaying properties of your Azure Active Directory tenant, in the vertical menu on the left side, in the **Manage** section, select **Properties**.
     
-    1.  On the **Properties** blade of your your Azure Active Directory tenant, in the **Access management for Azure resources** section, select **Yes** and then select **Save**.
+    1.  On the **Properties** blade of your Azure Active Directory tenant, in the **Access management for Azure resources** section, select **Yes** and then select **Save**.
     
     1.  Navigate back to the **Management groups** blade, and select **Refresh**.
 
-1. On the **Management groups** blade, click **+ Add** or **+ Create**.
+1. On the **Management groups** blade, click **+ Create**.
 
     >**Note**: If you have not previously created Management Groups, select **Create management group**
 
@@ -61,15 +47,17 @@ In this task, you will create and configure management groups.
     | Management group ID | **az104-02-mg1** |
     | Management group display name | **az104-02-mg1** |
 
+1. Click on **Submit**.
+
 1. In the list of management groups, click the entry representing the newly created management group.
 
 1. On the **az104-02-mg1** blade, click **Subscriptions**. 
 
 1. On the **az104-02-mg1 \| Subscriptions** blade, click **+ Add**, on the **Add subscription** blade, in the **Subscription** drop-down list, select the subscription you are using in this lab and click **Save**.
 
-    >**Note**: On the **az104-02-mg1 \| Subscriptions** blade, copy the ID of your Azure subscription into Clipboard. You will need it in the next task.
+    >**Note**: On the **az104-02-mg1 \| Subscriptions** blade, copy the ID of your Azure subscription into Clipboard. You will need it for the next task.
 
-#### Task 2: Create custom RBAC roles
+## Task 2: Create custom RBAC roles
 
 In this task, you will create a definition of a custom RBAC role.
 
@@ -103,27 +91,11 @@ In this task, you will create a definition of a custom RBAC role.
     
     ![image](../media/cloudshell1.png)
     
-    >Under **Advanced Settings** you need to select the resource group from **Resource group** dropdown and give some unique name under **Storage Account** section and under **File share** section type none as shown in the below image.
+    >Under **Advanced Settings**, you need to select an existing resource group from the **Resource group** dropdown and give some unique name under the **Storage Account** section, and under the **File share** section type none as shown in the below image.
 
     ![image](../media/cloudhell01.png)
 
 1. Click **Create storage**, and wait until the Azure Cloud Shell pane is displayed.
-
-1. Go to the Azure Active directory and click on User on the left pane and then click on All user(preview) and select ODL user and copy the Object ID and save it in Notepad.
-
-    ![image](../media/AZ-104oID.png)
-
-1. From the Cloud Shell pane run the following Command.
-
-   ```powershell
-   Connect-azuread
-   ```
-1. Replace object id in code and run the command.
-
-   ```powershell
-   Add-AzureADDirectoryRoleMember -ObjectId (Get-AzureADDirectoryRole | where-object {$_.DisplayName -eq "Directory Readers"}).Objectid -RefObjectId <object-id>
-   ```
-    
 
 1. In the toolbar of the Cloud Shell pane, click the **Upload/Download files** icon, in the drop-down menu click **Upload**, and upload the file **C:\AllFiles\AZ-104-MicrosoftAzureAdministrator-master\Allfiles\Labs\02\az104-02a-customRoleDefinition.json** into the Cloud Shell home directory.
 
@@ -136,7 +108,7 @@ In this task, you will create a definition of a custom RBAC role.
 
 1. Close the Cloud Shell pane.
 
-#### Task 3: Assign RBAC roles
+## Task 3: Assign RBAC roles
 
 In this task, you will create an Azure Active Directory user, assign the RBAC role you created in the previous task to that user, and verify that the user can perform the task specified in the RBAC role definition.
 
@@ -153,11 +125,11 @@ In this task, you will create an Azure Active Directory user, assign the RBAC ro
 
     >**Note**: **Copy to clipboard** the full **User name**. You will need it later in this lab.
 
-1. In the Azure portal, navigate back to the **az104-02-mg1** management group and display its **details**.
+1. In the Azure portal, navigate back to the **Management group** and select  **az104-02-mg1** and display its **details**.
 
-1. Click **Access control (IAM)**, click **+ Add** followed by **Role assignment**, and search for the **Support Request Contributor (Custom)** and assign the role to the newly created user account.
+1. Click **Access control (IAM)**, click **+ Add** followed by **Role assignment** and under Role Section search for the **Support Request Contributor (Custom)** and assign the role to the newly created user account.
 
-1.  Click on **+Select Member** and serach  the newly created user and select.
+1.  Click on **+ Select Member**, search and select for the newly created user.
 
 1. Open an **InPrivate** browser window and sign in to the [Azure portal](https://portal.azure.com) using the newly created user account. When prompted to update the password, change the password for the user.
 
@@ -167,9 +139,9 @@ In this task, you will create an Azure Active Directory user, assign the RBAC ro
 
 1. In the **InPrivate** browser window, in the Azure portal, search and select **All resources** to verify that the az104-02-aaduser1 user cannot see any resources.
 
-1. In the **InPrivate** browser window, in the Azure portal, search and select **Help + support** click **create a support request** . 
+1. In the **InPrivate** browser window, in the Azure portal, search and select **Help + support** and click on **create a support request**. 
 
-1. In the **InPrivate** browser window, on the **Problem Description** tab of the **Help + support - New support request** blade, type **Service and subscription limits** in the Summary field and select the **Service and subscription limits (quotas)** issue type. Note that the subscription you are using in this lab is listed in the **Subscription** drop-down list.
+1. In the **InPrivate** browser window, on the **Problem Description** tab of the **Help + support - New support request** blade, give Summary as **Service and subscription limits** in the Summary field and select the **Service and subscription limits (quotas)** issue type. Note that the subscription you are using in this lab is listed in the **Subscription** drop-down list.
 
     >**Note**: The presence of the subscription you are using in this lab in the **Subscription** drop-down list indicates that the account you are using has the permissions required to create the subscription-specific support request.
 
@@ -177,10 +149,14 @@ In this task, you will create an Azure Active Directory user, assign the RBAC ro
 
 1. Do not continue with creating the support request. Instead, sign out as the az104-02-aaduser1 user from the Azure portal and close the InPrivate browser window.
 
-#### Review
+   > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+   > - Navigate to the Lab Validation Page, from the upper right corner in the lab guide section.
+   > - Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task. 
+   > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+   > - If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
 
+### Review
 In this lab, you have:
-
 - Implemented Management Groups
 - Created custom RBAC roles 
 - Assigned RBAC roles

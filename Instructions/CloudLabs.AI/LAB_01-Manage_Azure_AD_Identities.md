@@ -1,6 +1,4 @@
-## Lab 01 - Manage Azure Active Directory Identities
-
-# Student lab manual
+# Lab 01 - Manage Azure Active Directory Identities
 
 ## Lab scenario
 
@@ -15,13 +13,12 @@ In this lab, you will:
 + Task 3: Create an Azure Active Directory (AD) tenant
 + Task 4: Manage Azure AD guest users 
 
-## Estimated timing: 30 minutes
+### Estimated timing: 30 minutes
 
-## Instructions
+## Architecture diagram
+   ![image](../media/lab01.png)
 
-### Exercise 1
-
-#### Task 1: Create and configure Azure AD users
+## Task 1: Create and configure Azure AD users
 
 In this task, you will create and configure Azure AD users.
 
@@ -33,7 +30,7 @@ In this task, you will create and configure Azure AD users.
 
 1. On the Azure Active Directory blade, in the **Manage** section, click **Users**, and then click your user account to display its **Profile** settings. 
 
-1. Click **Edit properties**, set **Usage location** to **United States** and click **save** to apply the change.
+1. Click **Edit properties**, set **Usage location** to **United States**, and click **save** to apply the change.
 
     >**Note**: This is necessary in order to assign an Azure AD Premium P2 license to your user account later in this lab.
 
@@ -52,12 +49,12 @@ In this task, you will create and configure Azure AD users.
     | Department | **IT** |
 
     >**Note**: **Copy to clipboard** the full **User Principal Name** (user name plus domain). You will need it later in this task.
-
+1. Click on **Create**.
 1. In the list of users, click the newly created user account to display its blade.
 
 1. Review the options available in the **Manage** section and note that you can identify the Azure AD roles assigned to the user account as well as the user account's permissions to Azure resources.
 
-1. In the **Manage** section, click **Assigned roles**, then click **+ Add assignment** button and assign the **User administrator** role to **az104-01a-aaduser1**.
+1. In the **Manage** section, click **Assigned roles**, then click **+ Add assignment** button and assign the **User administrator** role to **az104-01a-aaduser1** and under Setting selct assignment type as **Active**, enter **User** in justification and click on **Assign**.
 
     >**Note**: You also have the option of assigning Azure AD roles when provisioning a new user.
 
@@ -67,11 +64,11 @@ In this task, you will create and configure Azure AD users.
 
 1. In the **InPrivate** browser window, in the Azure portal, search for and select **Azure Active Directory**.
 
-    >**Note**: While this user account can access the Azure Active Directory tenant, it does not have any access to Azure resources. This is expected, since such access would need to be granted explicitly by using Azure Role-Based Access Control. 
+    >**Note**: While this user account can access the Azure Active Directory tenant, it does not have any access to Azure resources. This is expected since such access would need to be granted explicitly by using Azure Role-Based Access Control. 
 
-1. In the **InPrivate** browser window, on the Azure AD blade, scroll down to the **Manage** section, click **User settings**, and note that you do not have permissions to modify any configuration options.
+1. In the **InPrivate** browser window, on the Azure AD blade, scroll down to the **Manage** section, click **User settings**, and note that you do not have permission to modify any configuration options, and signout the user account **az104-01a-aaduser1** and close the Inprivate window.
 
-1. In the **InPrivate** browser window, on the Azure AD blade, in the **Manage** section, click **Users**, and then click **+ New user** then select **+ Create new user**..
+1. In the Azure portal, search for and select **Azure Active Directory**, in the **Manage** section, click **Users**, and then click **+ New user** then select **+ Create new user**.
 
 1. Create a new user with the following settings (leave others with their defaults):
 
@@ -89,7 +86,7 @@ In this task, you will create and configure Azure AD users.
 
     >**Note**: If the users are already created then you can skip this task and continue further. 
 
-#### Task 2: Create Azure AD groups with assigned and dynamic membership
+## Task 2: Create Azure AD groups with assigned and dynamic membership
 
 In this task, you will create Azure Active Directory groups with assigned and dynamic membership.
 
@@ -97,13 +94,17 @@ In this task, you will create Azure Active Directory groups with assigned and dy
 
     >**Note**: Azure AD Premium P1 or P2 licenses are required in order to implement dynamic groups.
 
-1. In the **Manage** section, click **All products**. Verify **Azure AD Premium P2** is already added in the list of licenses, if it is added then skip next two steps and continue.
+1. In the **Manage** section, click **All products**. Verify **Azure AD Premium P2** is already added to the list of licenses, if it is added then skip next two steps and continue.
 
 1. Click **+ Try/Buy** and activate the free trial of Azure AD Premium P2.
 
 1. Refresh the browser window to verify that the activation was successful. 
 
-1. From the **Licenses - All products** blade, select the **Azure Active Directory Premium P2** entry, and assign all license options of Azure AD Premium P2 to your user account and the two newly created user accounts.
+1. From the **Licenses - All products** blade, select the **Azure Active Directory Premium P2** entry.
+
+1. Click on **+ Assign**.
+
+1. On Assign license page click on **+ Add Users and groups** and assign all license options of Azure AD Premium P2 to your user account and the two newly created user accounts.
 
 1. In the Azure portal, navigate back to the Azure AD tenant blade and click **Groups**.
 
@@ -164,13 +165,19 @@ In this task, you will create Azure Active Directory groups with assigned and dy
 
 1. From the **Add members** blade, search and select the **IT Cloud Administrators** and **IT System Administrators** groups and, back on the **New Group** blade, click **Create**.
 
-1. Back on the **Groups - All groups** blade, click the entry representing the **IT Cloud Administrators** group and, on then display its **Members** blade. Verify that the **az104-01a-aaduser1** appears in the list of group members.
+1. Back on the **Groups - All groups** blade, click the entry representing the **IT Cloud Administrators** group and, then display its **Members** blade. Verify that the **az104-01a-aaduser1** appears in the list of group members.
 
     >**Note**: You might experience delays with updates of the dynamic membership groups. To expedite the update, navigate to the group blade, display its **Dynamic membership rules** blade, **Edit** the rule listed in the **Rule syntax** textbox by adding a whitespace at the end, and **Save** the change.
 
-1. Navigate back to the **Groups - All groups** blade, click the entry representing the **IT System Administrators** group and, on then display its **Members** blade. Verify that the **az104-01a-aaduser2** appears in the list of group members.
+1. Navigate back to the **Groups - All groups** blade, click the entry representing the **IT System Administrators** group and, then display its **Members** blade. Verify that the **az104-01a-aaduser2** appears in the list of group members.
 
-#### Task 3: Create an Azure Active Directory (AD) tenant
+   > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+   > - Navigate to the Lab Validation Page, from the upper right corner in the lab guide section.
+   > - Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task. 
+   > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+   > - If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+## Task 3: Create an Azure Active Directory (AD) tenant
 
 In this task, you will create a new Azure AD tenant.
 
@@ -180,9 +187,9 @@ In this task, you will create a new Azure AD tenant.
 
     | Setting | Value |
     | --- | --- |
-    | Directory type | **Azure Active Directory** |
+    | Select a tenant type | **Azure Active Directory** |
     
-1. Click **Next : Configuration**
+1. Click **Next: Configuration**
 
     | Setting | Value |
     | --- | --- |
@@ -190,13 +197,13 @@ In this task, you will create a new Azure AD tenant.
     | Initial domain name | any valid DNS name consisting of lower case letters and digits and starting with a letter | 
     | Country/Region | **United States** |
 
-   > **Note**: The **Initial domain name** should not be a legitimate name that potentially matches your organization or another. The green check mark in the **Initial domain name** text box will indicate that the domain name you typed in is valid and unique.
+   > **Note**: The **Initial domain name** should not be a legitimate name that potentially matches your organization or another. The green checkmark in the **Initial domain name** text box will indicate that the domain name you typed in is valid and unique.
 
 1. Click **Review + create** then **Create**, enter the captcha and click **Submit**.
 
-1. Display the blade of the newly created Azure AD tenant by using the **Click here to navigate to your new tenant: Contoso Lab** link or the **Directory + Subscription** button (directly to the right of the Cloud Shell button) in the Azure portal toolbar.
+1. Display the blade of the newly created Azure AD tenant by using the **Click here to navigate to your new tenant: Contoso Lab** link or the **Directory + Subscription** button (directly to the right of the Cloud Shell button) in the Azure portal toolbar and, click on **Switch**.
 
-#### Task 4: Manage Azure AD guest users.
+## Task 4: Manage Azure AD guest users.
 
 In this task, you will create Azure AD guest users and grant them access to resources in an Azure subscription.
 
@@ -217,7 +224,7 @@ In this task, you will create Azure AD guest users and grant them access to reso
 
     >**Note**: **Copy to clipboard** the full **User Principal Name** (user name plus domain). You will need it later in this task.
 
-1. Switch back to your default Azure AD tenant by using the **Directory + Subscription** button (directly to the right of the Cloud Shell button) in the Azure portal toolbar.
+1. Switch back to your default Azure AD tenant **Adatum Corporation** by using the **Directory + Subscription** button (directly to the right of the Cloud Shell button) in the Azure portal toolbar.
 
 1. Navigate back to the **Users - All users** blade, click **+ New user** then select **Invite external user**.
 
@@ -239,7 +246,13 @@ In this task, you will create Azure AD guest users and grant them access to reso
 
 1. Click **+ Add membership** and add the guest user account to the **IT Lab Administrators** group.
 
-#### Review
+   > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+   > - Navigate to the Lab Validation Page, from the upper right corner in the lab guide section.
+   > - Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task. 
+   > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+   > - If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
+
+### Review
 
 In this lab, you have:
 
