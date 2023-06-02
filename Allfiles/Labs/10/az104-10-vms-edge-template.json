@@ -251,13 +251,9 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmNamePrefix'), copyindex(), '/customScriptExtension')]",
       "apiVersion": "2019-07-01",
+      "name": "[concat(parameters('vmNamePrefix'), copyindex(), '/customScriptExtension')]",
       "location": "[resourceGroup().location]",
-      "copy": { 
-        "name": "cSELoop",
-        "count": "[variables('numberOfInstances')]"
-      },
       "dependsOn": [
         "[concat(parameters('vmNamePrefix'), copyindex())]"
       ],
@@ -266,12 +262,18 @@
         "type": "CustomScriptExtension",
         "typeHandlerVersion": "1.8",
         "autoUpgradeMinorVersion": true,
-        "fileUris": [
-          "https://raw.githubusercontent.com/CloudLabs-MOC/AZ-104-MicrosoftAzureAdministrator/Lab-Files/Allfiles/Labs/10/psscript.ps1"
-        ]
+        "settings": {
+          "fileUris": [
+            "https://raw.githubusercontent.com/CloudLabs-MOC/AZ-104-MicrosoftAzureAdministrator/Lab-Files/Allfiles/Labs/10/psscript.ps1"
+          ]
+        },
+        "protectedSettings": {
+          "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File psscript.ps1' )]"
+        }
       },
-      "protectedSettings": {
-        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File psscript.ps1' )]"
+      "copy": {
+        "name": "cSELoop",
+        "count": "[variables('numberOfInstances')]"
       }
     }
   ]
