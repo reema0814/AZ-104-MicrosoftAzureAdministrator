@@ -272,7 +272,8 @@
           "typeHandlerVersion": "1.10",
           "autoUpgradeMinorVersion": true,
           "Settings": {
-            "commandToExecute": "powershell.exe Set-ExecutionPolicy Bypass -Scope Process -Force && powershell.exe Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) && powershell.exe c:\\programdata\\chocolatey\\choco.exe install microsoft-edge -y"
+            "fileUris": ["https://github.com/CloudLabs-MOC/AZ-104-MicrosoftAzureAdministrator/blob/Lab-Files/Allfiles/Labs/10/psscript.ps1"], 
+            "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File psscript.ps1"
          }
         }
     }
