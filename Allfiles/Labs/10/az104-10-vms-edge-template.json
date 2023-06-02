@@ -261,14 +261,13 @@
         "dependsOn": [
           "[concat(parameters('vmNamePrefix'), copyindex())]"
         ],
-        "properties": {
+         "properties": {
           "publisher": "Microsoft.Compute",
           "type": "CustomScriptExtension",
           "typeHandlerVersion": "1.10",
           "autoUpgradeMinorVersion": true,
           "Settings": {
-            "fileUris": ["https://github.com/CloudLabs-MOC/AZ-104-MicrosoftAzureAdministrator/blob/Lab-Files/Allfiles/Labs/10/psscript.ps1"], 
-            "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File psscript.ps1"
+            "commandToExecute": "powershell.exe -Command \"Set-ExecutionPolicy Bypass -Scope Process -Force && [System.Environment]::SetEnvironmentVariable('chocolateyVersion','1.4.0', 'Machine') && iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) && powershell.exe c:\\programdata\\chocolatey\\choco.exe install microsoft-edge -y\""
          }
         }
     }
