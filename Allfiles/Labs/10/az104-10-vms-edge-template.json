@@ -236,7 +236,7 @@
           "osDisk": {
             "createOption": "FromImage",
             "managedDisk": {
-               "storageAccountType": "Standard_LRS"
+              "storageAccountType": "Standard_LRS"
             }
           }
         },
@@ -251,25 +251,28 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(parameters('vmNamePrefix'), copyindex(), '/customScriptExtension')]",
-        "apiVersion": "2018-06-01",
-        "location": "[resourceGroup().location]",
-        "copy": {
-          "name": "cSELoop",
-          "count": "[variables('numberOfInstances')]"
-        },
-        "dependsOn": [
-          "[concat(parameters('vmNamePrefix'), copyindex())]"
-        ],
-         "properties": {
-          "publisher": "Microsoft.Compute",
-          "type": "CustomScriptExtension",
-          "typeHandlerVersion": "1.10",
-          "autoUpgradeMinorVersion": true,
-          "Settings": {
-            "commandToExecute": "powershell.exe -Command \"Set-ExecutionPolicy Bypass -Scope Process -Force && [System.Environment]::SetEnvironmentVariable('chocolateyVersion','1.4.0', 'Machine') && iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) && powershell.exe c:\\programdata\\chocolatey\\choco.exe install microsoft-edge -y\""
-         }
-        }
+      "name": "[concat(parameters('vmNamePrefix'), copyindex(), '/customScriptExtension')]",
+      "apiVersion": "2019-07-01",
+      "location": "[resourceGroup().location]",
+      "copy": { 
+        "name": "cSELoop",
+        "count": "[variables('numberOfInstances')]"
+      },
+      "dependsOn": [
+        "[concat(parameters('vmNamePrefix'), copyindex())]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Compute",
+        "type": "CustomScriptExtension",
+        "typeHandlerVersion": "1.8",
+        "autoUpgradeMinorVersion": true,
+        "fileUris": [
+          "https://raw.githubusercontent.com/CloudLabs-MOC/AZ-104-MicrosoftAzureAdministrator/Lab-Files/Allfiles/Labs/10/psscript.ps1"
+        ]
+      },
+      "protectedSettings": {
+        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File psscript.ps1' )]"
+      }
     }
   ]
 }
