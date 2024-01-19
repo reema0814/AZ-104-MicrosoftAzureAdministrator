@@ -6,7 +6,7 @@ lab:
 
 # Lab 01 - Manage Azure Active Directory Identities
 
-# Student lab manual
+# Student lab manual.
 
 ## Lab scenario
 
